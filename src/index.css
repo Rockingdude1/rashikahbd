@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --font-script: "Meddon", cursive;
+  --font-display: "Fraunces", serif;
+  --font-body: "Quicksand", sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  --color-paper: #f4ecdc;
+  --color-paper-deep: #e8dcc0;
+  --color-paper-shadow: #d9c9a8;
+  --color-maroon: #7a2320;
+  --color-maroon-deep: #4f1614;
+  --color-rose: #c67b74;
+  --color-rose-soft: #e3b3ab;
+  --color-blush: #f0d9d1;
+  --color-ink: #3a2620;
+  --color-gold: #b8873f;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-maroon-deep);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    overscroll-behavior: none;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  .paper-texture {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(122, 35, 32, 0.035) 0, transparent 45%),
+      radial-gradient(circle at 80% 60%, rgba(122, 35, 32, 0.035) 0, transparent 40%),
+      repeating-linear-gradient(
+        0deg,
+        rgba(122, 35, 32, 0.02) 0px,
+        rgba(122, 35, 32, 0.02) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -18,15 +18,6 @@
   --color-gold: #b8873f;
 }
 
-@keyframes carousel-spin {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
-
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;

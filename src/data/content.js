@@ -1,11 +1,23 @@
 // Placeholder content — swap image/video URLs and copy for the real thing.
 // Images: picsum.photos placeholders. Video: public sample clip for preview only.
 
+import hero2023 from "../assets/media/hero_2023.jpeg";
+import hero2024 from "../assets/media/hero_2024.jpeg";
+import hero2025 from "../assets/media/hero_2025.jpeg";
+import hero2026 from "../assets/media/hero_2026.jpeg";
+
 export const PLACEHOLDER_VIDEO =
   "https://www.w3schools.com/html/mov_bbb.mp4";
 
 const img = (seed, w = 700, h = 900) =>
   `https://picsum.photos/seed/${seed}/${w}/${h}`;
+
+export const homePhotos = [
+  { year: "2023", src: hero2023 },
+  { year: "2024", src: hero2024 },
+  { year: "2025", src: hero2025 },
+  { year: "2026", src: hero2026 },
+];
 
 export const firsts = [
   {

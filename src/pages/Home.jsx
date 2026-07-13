@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import StickerLabel from "../components/StickerLabel";
-import StampPhoto, { STAMP_HEIGHT, STAMP_WIDTH } from "../components/StampPhoto";
+import StampPhoto, { STAMP_WIDTH } from "../components/StampPhoto";
 import ReceiptSlot from "../components/ReceiptSlot";
 import { CatDoodle, BunnyDoodle, ScribbleHeart } from "../components/Doodles";
 import { homePhotos } from "../data/content";
@@ -10,11 +10,9 @@ import { generatePaperGrainDataUrl } from "../utils/paperGrain";
 const BIRTHDAY = new Date("2026-07-15T00:00:00");
 const GAP = 14;
 const START_DELAY = 300; // ms before the first print begins
-const SHIFT_DURATION = 0.7; // seconds — every photo in motion moves at this same speed, in lockstep
-const PRINT_INTERVAL = SHIFT_DURATION * 1000 + 260; // ms between one print starting and the next
-const STACK_HEIGHT = homePhotos.length * STAMP_HEIGHT + (homePhotos.length - 1) * GAP;
+const SHIFT_DURATION = 0.7; // seconds — how long each photo's own entrance takes
+const PRINT_INTERVAL = SHIFT_DURATION * 1000 + 320; // ms between one print starting and the next
 const SHIFT_TRANSITION = { type: "tween", duration: SHIFT_DURATION, ease: [0.45, 0, 0.2, 1] };
-const FIT_TRANSITION = { duration: 0.8, ease: [0.22, 1, 0.36, 1] };
 
 function useDaysLeft() {
   const now = new Date();
@@ -25,7 +23,6 @@ export default function Home() {
   const daysLeft = useDaysLeft();
   const [printed, setPrinted] = useState([]);
   const [settled, setSettled] = useState(false);
-  const [fit, setFit] = useState({ height: STACK_HEIGHT, scale: 1 });
   const scrollRef = useRef(null);
 
   const paperBg = useMemo(() => {
@@ -43,27 +40,34 @@ export default function Home() {
   useEffect(() => {
     const timers = homePhotos.map((photo, i) =>
       setTimeout(() => {
-        setPrinted((prev) => [photo, ...prev]);
+        setPrinted((prev) => [...prev, photo]);
       }, START_DELAY + i * PRINT_INTERVAL)
     );
     timers.push(
       setTimeout(
         () => setSettled(true),
-        START_DELAY + homePhotos.length * PRINT_INTERVAL + 200
+        START_DELAY + homePhotos.length * PRINT_INTERVAL + 300
       )
     );
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  // The whole page auto-scrolls to follow each new photo as it prints — the
+  // slot scrolls out of view just like a real scroll gesture would, rather
+  // than staying pinned while content slides underneath it.
   useEffect(() => {
-    if (!settled || !scrollRef.current) return;
     const el = scrollRef.current;
-    const overflow = el.scrollHeight - el.clientHeight;
-    if (overflow > 0) {
-      const target = Math.max(STACK_HEIGHT - overflow - 16, STACK_HEIGHT * 0.4);
-      setFit({ height: target, scale: target / STACK_HEIGHT });
-    }
-  }, [settled]);
+    if (!el || printed.length === 0) return;
+    const target = el.scrollHeight - el.clientHeight;
+    const controls = animate(el.scrollTop, target, {
+      duration: SHIFT_DURATION,
+      ease: [0.45, 0, 0.2, 1],
+      onUpdate: (v) => {
+        el.scrollTop = v;
+      },
+    });
+    return () => controls.stop();
+  }, [printed.length]);
 
   return (
     <div
@@ -94,30 +98,19 @@ export default function Home() {
 
         <ReceiptSlot />
 
-        <motion.div
-          className="relative z-0 mx-auto mt-2 overflow-hidden"
-          style={{ width: STAMP_WIDTH }}
-          animate={{ height: fit.height }}
-          transition={FIT_TRANSITION}
+        <div
+          className="relative z-0 mx-auto mt-2 flex flex-col"
+          style={{ width: STAMP_WIDTH, gap: GAP }}
         >
-          <motion.div
-            animate={{ scale: fit.scale }}
-            transition={FIT_TRANSITION}
-            style={{ transformOrigin: "top center", height: STACK_HEIGHT, overflow: "hidden" }}
-          >
-            <div className="flex flex-col" style={{ gap: GAP }}>
-              {printed.map((photo, idx) => (
-                <StampPhoto
-                  key={photo.year}
-                  src={photo.src}
-                  caption={photo.year}
-                  transition={SHIFT_TRANSITION}
-                  zIndex={printed.length - idx}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+          {printed.map((photo) => (
+            <StampPhoto
+              key={photo.year}
+              src={photo.src}
+              caption={photo.year}
+              transition={SHIFT_TRANSITION}
+            />
+          ))}
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}

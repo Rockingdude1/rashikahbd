@@ -6,23 +6,18 @@ export const STAMP_HEIGHT = 256;
 const mask = scallopMask(STAMP_WIDTH, STAMP_HEIGHT, 8);
 const PEEK_OFFSET = -(STAMP_HEIGHT * 0.75);
 
-// `layout` measures this element's position before/after every render and
-// animates the delta as a single transform (FLIP) — that's what keeps every
-// photo already in the stack moving in the same synchronized motion as a new
-// one enters, all on one shared clock instead of independent timers. The
-// photos move; the page itself never actually scrolls.
-// Only `transform`/`opacity` are ever animated here (never height/top), so
-// the browser can composite the move on the GPU instead of re-laying-out
-// every frame.
-export default function StampPhoto({ src, caption, transition, zIndex }) {
+// Each photo just appends to the end of the list and plays its own
+// peek -> settle entrance. The page itself auto-scrolls to follow new
+// content (see Home.jsx), so there's no need for siblings to reflow —
+// only `transform`/`opacity` animate here, keeping it GPU-composited.
+export default function StampPhoto({ src, caption, transition }) {
   return (
     <motion.div
-      layout
       initial={{ y: PEEK_OFFSET }}
       animate={{ y: 0 }}
       transition={transition}
       className="relative"
-      style={{ width: STAMP_WIDTH, zIndex, willChange: "transform" }}
+      style={{ width: STAMP_WIDTH, willChange: "transform" }}
     >
       <div
         className="bg-white p-2.5"

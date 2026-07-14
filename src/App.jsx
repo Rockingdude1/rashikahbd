@@ -7,6 +7,7 @@ import OurTrips from "./pages/OurTrips";
 import OurTraditions from "./pages/OurTraditions";
 import WhoDoYouThink from "./pages/WhoDoYouThink";
 import ClosingNote from "./pages/ClosingNote";
+import BirthdayCake from "./pages/BirthdayCake";
 
 const PAGES = [
   { id: "home", label: "Home" },
@@ -15,6 +16,7 @@ const PAGES = [
   { id: "traditions", label: "Our Traditions" },
   { id: "quiz", label: "Who Do You Think" },
   { id: "closing", label: "One Last Thing" },
+  { id: "cake", label: "Blow Out The Candles" },
 ];
 
 export default function App() {
@@ -39,6 +41,8 @@ export default function App() {
         return <WhoDoYouThink />;
       case "closing":
         return <ClosingNote />;
+      case "cake":
+        return <BirthdayCake />;
       default:
         return null;
     }

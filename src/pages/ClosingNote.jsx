@@ -163,7 +163,7 @@ export default function ClosingNote() {
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-xs bg-paper p-6 shadow-2xl"
+              className="flex max-h-[80vh] w-full max-w-sm flex-col bg-paper p-5 pb-6 shadow-2xl"
             >
               <span className="mx-auto mb-3 block w-fit rounded-full border border-maroon/50 px-2 py-0.5 text-center font-hand text-sm text-maroon">
                 {active.stamp}
@@ -171,7 +171,7 @@ export default function ClosingNote() {
               <p className="text-center font-script text-lg text-maroon">
                 {active.label}
               </p>
-              <p className="mt-4 text-center font-hand text-xl leading-relaxed text-ink/80">
+              <p className="mb-1 mt-4 max-h-[55vh] overflow-y-auto whitespace-pre-line text-left font-body text-sm leading-relaxed text-ink/80">
                 {active.message}
               </p>
               <button

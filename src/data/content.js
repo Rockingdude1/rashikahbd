@@ -6,7 +6,7 @@ import hero2024 from "../assets/media/hero_2024.jpeg";
 import hero2025 from "../assets/media/hero_2025.jpeg";
 import hero2026 from "../assets/media/hero_2026.jpeg";
 
-import firstTrip from "../assets/media/first_trip.mp4";
+import firstTrip from "../assets/media/first_trip.png";
 import firstOuting from "../assets/media/first_outing.jpeg";
 import firstParty from "../assets/media/first_party.jpeg";
 import firstConcert from "../assets/media/first_concert.mp4";
@@ -18,11 +18,25 @@ import firstChedna from "../assets/media/first_chedna.mp4";
 import firstVape from "../assets/media/first_vape.mp4";
 import firstPass from "../assets/media/first_pass.mp4";
 
-export const PLACEHOLDER_VIDEO =
-  "https://www.w3schools.com/html/mov_bbb.mp4";
+import jaipurVideo from "../assets/media/jaipur_video.mp4";
+import jaipurPhoto1 from "../assets/media/jaipur_photo_1.png";
+import jaipurPhoto2 from "../assets/media/jaipur_photo_2.png";
+import jaipurPhoto3 from "../assets/media/jaipur_photo_3.png";
 
-const img = (seed, w = 700, h = 900) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+import tirthanVideo from "../assets/media/tirthan_video.mp4";
+import tirthanPhoto1 from "../assets/media/tirthan_photo_1.png";
+import tirthanPhoto2 from "../assets/media/tirthan_photo_2.png";
+import tirthanPhoto3 from "../assets/media/tirthan_photo_3.png";
+
+import mussoorieVideo from "../assets/media/mussorie_video.mp4";
+import mussooriePhoto1 from "../assets/media/mussorie_photo_1.png";
+import mussooriePhoto2 from "../assets/media/mussorie_photo_2.png";
+import mussooriePhoto3 from "../assets/media/musoorie_photo_3.png";
+
+import goaVideo from "../assets/media/goa_video.mp4";
+import goaPhoto1 from "../assets/media/goa_photo_1.png";
+import goaPhoto2 from "../assets/media/goa_photo_2.png";
+import goaPhoto3 from "../assets/media/goa_photo_3.png";
 
 export const homePhotos = [
   { year: "2023", src: hero2023 },
@@ -37,27 +51,27 @@ export const firsts = [
     label: "Our first trip",
     stamp: "01",
     caption: "The Jaipur trip none of us planned properly, and it was perfect anyway.",
-    media: { type: "video", src: firstTrip, aspect: 640 / 480 },
+    media: { type: "image", src: firstTrip, aspect: 352 / 640 },
   },
   {
     id: "first-outing",
     label: "First outing",
     stamp: "02",
-    caption: "Just the two of us and nowhere we actually needed to be.",
+    caption: "the day you got lucky!",
     media: { type: "image", src: firstOuting, aspect: 3088 / 2316 },
   },
   {
     id: "first-party",
     label: "First party",
     stamp: "03",
-    caption: "Dressed up for a party neither of us remembers half of.",
+    caption: "Sanvi fell.",
     media: { type: "image", src: firstParty, aspect: 3024 / 4032 },
   },
   {
     id: "first-concert",
     label: "First concert",
     stamp: "04",
-    caption: "Screaming lyrics neither of us fully knew, front row anyway.",
+    caption: "When we just started to think that Neal seems like a good guy.",
     media: { type: "video", src: firstConcert, aspect: 480 / 848 },
   },
   {
@@ -71,28 +85,28 @@ export const firsts = [
     id: "first-challenge",
     label: "First challenge",
     stamp: "06",
-    caption: "A dare neither of us backed out of, for once.",
+    caption: "17 FUCKING KATORIS!!!",
     media: { type: "video", src: firstChallenge, aspect: 1024 / 576 },
   },
   {
     id: "first-ishq",
     label: "First ishq era",
     stamp: "07",
-    caption: "The song we put on loop that entire month.",
+    caption: "A revelation for Aayush",
     media: { type: "video", src: firstIshq, aspect: 544 / 960 },
   },
   {
     id: "first-wedding",
     label: "First wedding",
     stamp: "08",
-    caption: "Someone else's big day, our own inside jokes the whole time.",
+    caption: "The photo none of us remembers.",
     media: { type: "image", src: firstWedding, aspect: 576 / 1280 },
   },
   {
     id: "first-chedna",
     label: "First chedna",
     stamp: "09",
-    caption: "You started it. I finished it, obviously.",
+    caption: "the goons were going to climb 208 first ofc.",
     media: { type: "video", src: firstChedna, aspect: 480 / 848 },
   },
   {
@@ -106,7 +120,7 @@ export const firsts = [
     id: "first-pass",
     label: "First pass",
     stamp: "11",
-    caption: "Sneaking in like we owned the place.",
+    caption: "cute.",
     media: { type: "video", src: firstPass, aspect: 1280 / 720 },
   },
 ];
@@ -117,8 +131,8 @@ export const trips = [
     name: "Jaipur",
     tagline: "Where it all began",
     year: "2023",
-    video: PLACEHOLDER_VIDEO,
-    photos: [img("jaipur-1"), img("jaipur-2"), img("jaipur-3")],
+    video: jaipurVideo,
+    photos: [jaipurPhoto1, jaipurPhoto2, jaipurPhoto3],
     note: "Pink walls, kulfi at 11pm, and getting hopelessly lost near Hawa Mahal.",
   },
   {
@@ -126,26 +140,17 @@ export const trips = [
     name: "Tirthan Valley",
     tagline: "The trip that needed no wifi",
     year: "2023",
-    video: PLACEHOLDER_VIDEO,
-    photos: [img("tirthan-1"), img("tirthan-2"), img("tirthan-3")],
+    video: tirthanVideo,
+    photos: [tirthanPhoto1, tirthanPhoto2, tirthanPhoto3],
     note: "River sounds, bonfire smoke in our hair for a week straight.",
-  },
-  {
-    id: "vrindavan",
-    name: "Vrindavan",
-    tagline: "The unexpectedly peaceful one",
-    year: "2024",
-    video: PLACEHOLDER_VIDEO,
-    photos: [img("vrindavan-1"), img("vrindavan-2"), img("vrindavan-3")],
-    note: "Temple bells at sunrise and the best kachori of our lives.",
   },
   {
     id: "mussoorie",
     name: "Mussoorie",
     tagline: "The one with all the fog",
     year: "2024",
-    video: PLACEHOLDER_VIDEO,
-    photos: [img("mussoorie-1"), img("mussoorie-2"), img("mussoorie-3")],
+    video: mussoorieVideo,
+    photos: [mussooriePhoto1, mussooriePhoto2, mussooriePhoto3],
     note: "Couldn't see two feet ahead, laughed the entire way down Camel's Back Road.",
   },
   {
@@ -153,8 +158,8 @@ export const trips = [
     name: "Goa",
     tagline: "The one we still talk about",
     year: "2025",
-    video: PLACEHOLDER_VIDEO,
-    photos: [img("goa-1"), img("goa-2"), img("goa-3")],
+    video: goaVideo,
+    photos: [goaPhoto1, goaPhoto2, goaPhoto3],
     note: "Sunburnt, salty, and refusing to let the trip end.",
   },
 ];
@@ -196,20 +201,23 @@ export const closingNote = [
   {
     id: "note-1",
     stamp: "01",
-    label: "if you're reading this",
-    message: "...we made it. Twenty-one, somehow, impossibly, actually here.",
+    label: "from Deepika",
+    message:
+      "happy birthdayy rashikkkka!!\n\ncan't believe its been almost 4 years now. so many misunderstandings along the way, but now I know, this one's gonna last, we're stuck for life.\n\nI will forever be grateful for the time when Sanvi and Rashika were both not there and we bonded. Bonded on so many things and from that day, you somehow became my comfort person. Anytime I felt bad, I would come to you to vent — be it about boys, other friends, family, college or Kanika. And you always listened, next day exam ho agar tabhi bhi mana nhi krti thi. That one night on the terrace where we tried new food and almost fell sick (iykyk) and mam came and I was suddenly alright but you were still sick, it was very funny 🤣\n\nI will always cherish that, probably gonna tell my kids that.\n\nI will miss seeing you in cafeteria upon entering (kyuki tum hamesha wahi rehti thi) kabhi bhi jao. Your creativity with food omg oolalaa!!\n\nThankyou for everything. You have the kindest soul. Oh also, thankyou for the perfect liner wing always. Thankyou for taking care of me when I fell sick. Thankyou for listening. Thankyou for never judging. Thankyou for just being there.\n\nyou say you dont want kids, bht trust me you'll be the best mom ever, cus you have the mom instinct — the best one.\n\nI love you so much and I'm so grateful that you're my friend.",
   },
   {
     id: "note-2",
     stamp: "02",
-    label: "just so you know",
-    message: "every ridiculous memory in this site is real, and I wouldn't trade a single one of them.",
+    label: "from Sanvi",
+    message:
+      "Hii Rashika,\n\nA very happy birthday to you.\n\nI'm honestly very skeptical in what to say to you. Because there hasn't been a day since the past 2 years where I haven't talked to you. I miss you. Every day. Every moment I feel like taking a break from work, I feel like going to your room and talking to you. I don't want to make this an emo moment but I'm still not over the fact that we're not living together anymore. I do not have a lot of time, so hear me out. I know I tell you this every day, but I'm gonna say it again. I'm there for you, and I know that you'll do wonders in life. I know that you're gonna make me so proud and I know that the reasons you hate yourself today, will be your motivators to achieve everything in life.\n\nHere's to a new beginning, a new you, with more positivity and self love🤍",
   },
   {
     id: "note-3",
     stamp: "03",
-    label: "and one last thing",
-    message: "happy birthday, Rashika. here's to twenty-one and everything after. love you endlessly.",
+    label: "from Tanisha",
+    message:
+      "Happy birthday rashikaa🥳🥳 You are the kindest person I know. We have been through a lot of ups and downs but still we are standing here next to each other. I really cherish the time spent together from playing games to watching Splitsvilla. I love you. To be continued….",
   },
 ];
 

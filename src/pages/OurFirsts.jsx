@@ -5,7 +5,7 @@ import { firsts } from "../data/content";
 
 const ROTATIONS = [-7, 5, -4, 8, -9, 6];
 
-export default function OurFirsts({ onNext }) {
+export default function OurFirsts() {
   const [remaining, setRemaining] = useState(firsts);
   const [active, setActive] = useState(null);
 
@@ -41,13 +41,6 @@ export default function OurFirsts({ onNext }) {
               <p className="font-display text-lg font-semibold text-maroon">
                 That's all our firsts... for now.
               </p>
-              <button
-                type="button"
-                onClick={onNext}
-                className="rounded-full bg-maroon px-6 py-2.5 font-display text-sm font-semibold text-paper shadow-md"
-              >
-                Next: our trips →
-              </button>
             </motion.div>
           )}
 
@@ -110,13 +103,15 @@ export default function OurFirsts({ onNext }) {
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-xs bg-paper p-3 pb-5 shadow-2xl"
             >
-              <div className="aspect-[4/5] w-full overflow-hidden bg-paper-deep">
+              <div
+                className="max-h-[70vh] w-full overflow-hidden bg-paper-deep"
+                style={{ aspectRatio: active.media.aspect ?? 4 / 5 }}
+              >
                 {active.media.type === "video" ? (
                   <video
                     src={active.media.src}
                     className="h-full w-full object-cover"
                     autoPlay
-                    muted
                     loop
                     playsInline
                   />

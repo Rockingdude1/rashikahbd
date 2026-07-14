@@ -1,11 +1,12 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PageTransition from "./components/PageTransition";
-import BottomNav from "./components/BottomNav";
+import PageArrows from "./components/PageArrows";
 import Home from "./pages/Home";
 import OurFirsts from "./pages/OurFirsts";
 import OurTrips from "./pages/OurTrips";
 import OurTraditions from "./pages/OurTraditions";
 import WhoDoYouThink from "./pages/WhoDoYouThink";
+import ClosingNote from "./pages/ClosingNote";
 
 const PAGES = [
   { id: "home", label: "Home" },
@@ -13,30 +14,31 @@ const PAGES = [
   { id: "trips", label: "Our Trips" },
   { id: "traditions", label: "Our Traditions" },
   { id: "quiz", label: "Who Do You Think" },
+  { id: "closing", label: "One Last Thing" },
 ];
 
 export default function App() {
   const [index, setIndex] = useState(0);
-  const direction = useRef(1);
 
   const goTo = (next) => {
     if (next === index) return;
-    direction.current = next > index ? 1 : -1;
     setIndex(next);
   };
 
   const renderPage = () => {
     switch (PAGES[index].id) {
       case "home":
-        return <Home onNext={() => goTo(1)} />;
+        return <Home />;
       case "firsts":
-        return <OurFirsts onNext={() => goTo(2)} />;
+        return <OurFirsts />;
       case "trips":
-        return <OurTrips onNext={() => goTo(3)} />;
+        return <OurTrips />;
       case "traditions":
-        return <OurTraditions onNext={() => goTo(4)} />;
+        return <OurTraditions />;
       case "quiz":
         return <WhoDoYouThink />;
+      case "closing":
+        return <ClosingNote />;
       default:
         return null;
     }
@@ -51,11 +53,16 @@ export default function App() {
             "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 60%)",
         }}
       >
-        <PageTransition pageKey={PAGES[index].id} direction={direction.current}>
+        <PageTransition pageKey={PAGES[index].id}>
           {renderPage()}
         </PageTransition>
 
-        <BottomNav pages={PAGES} activeIndex={index} onSelect={goTo} />
+        <PageArrows
+          onPrev={() => goTo(index - 1)}
+          onNext={() => goTo(index + 1)}
+          disablePrev={index === 0}
+          disableNext={index === PAGES.length - 1}
+        />
       </div>
     </div>
   );

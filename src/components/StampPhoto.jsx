@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-import { scallopMask } from "../utils/scallop";
 
-export const STAMP_WIDTH = 208;
-export const STAMP_HEIGHT = 256;
-const mask = scallopMask(STAMP_WIDTH, STAMP_HEIGHT, 8);
+export const STAMP_WIDTH = 184;
+export const STAMP_HEIGHT = 226;
 const PEEK_OFFSET = -(STAMP_HEIGHT * 0.75);
 
 // Each photo just appends to the end of the list and plays its own
@@ -20,21 +18,15 @@ export default function StampPhoto({ src, caption, transition }) {
       style={{ width: STAMP_WIDTH, willChange: "transform" }}
     >
       <div
-        className="bg-white p-2.5"
-        style={{
-          height: STAMP_HEIGHT,
-          WebkitMaskImage: mask,
-          maskImage: mask,
-          WebkitMaskSize: "100% 100%",
-          maskSize: "100% 100%",
-        }}
+        className="rounded-xl bg-white p-1.5"
+        style={{ height: STAMP_HEIGHT }}
       >
         <img
           src={src}
           alt=""
           loading="eager"
           decoding="sync"
-          className="h-full w-full object-cover"
+          className="h-full w-full rounded-lg object-cover"
         />
       </div>
       {caption && (

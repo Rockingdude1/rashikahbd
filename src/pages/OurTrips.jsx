@@ -1,32 +1,11 @@
-import { useRef, useState } from "react";
 import PageShell from "../components/PageShell";
 import StickerLabel from "../components/StickerLabel";
 import { trips } from "../data/content";
 
-export default function OurTrips({ onNext }) {
-  const scrollerRef = useRef(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  const handleScroll = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const idx = Math.round(el.scrollLeft / el.clientWidth);
-    setActiveIdx(idx);
-  };
-
-  const scrollTo = (i) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
-  };
-
+export default function OurTrips() {
   return (
     <PageShell eyebrow="five roads, one friendship" title="Our Trips">
-      <div
-        ref={scrollerRef}
-        onScroll={handleScroll}
-        className="scrollbar-none -mx-6 flex snap-x snap-mandatory overflow-x-auto sm:-mx-10"
-      >
+      <div className="scrollbar-none -mx-6 flex snap-x snap-mandatory overflow-x-auto sm:-mx-10">
         {trips.map((trip) => (
           <article
             key={trip.id}
@@ -69,30 +48,6 @@ export default function OurTrips({ onNext }) {
             </div>
           </article>
         ))}
-      </div>
-
-      <div className="mt-6 flex justify-center gap-2">
-        {trips.map((t, i) => (
-          <button
-            key={t.id}
-            type="button"
-            aria-label={`Go to ${t.name}`}
-            onClick={() => scrollTo(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === activeIdx ? "w-6 bg-maroon" : "w-2 bg-maroon/25"
-            }`}
-          />
-        ))}
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <button
-          type="button"
-          onClick={onNext}
-          className="rounded-full bg-maroon px-6 py-2.5 font-display text-sm font-semibold text-paper shadow-md"
-        >
-          Next: our traditions →
-        </button>
       </div>
     </PageShell>
   );

@@ -4,18 +4,17 @@ import PageShell from "../components/PageShell";
 import { traditions } from "../data/content";
 
 const POINTS = [
-  { top: 6, left: 22, icon: "🎁" },
+  { top: 6, left: 22 },
   { top: 25, left: 76 },
   { top: 46, left: 22 },
   { top: 67, left: 76 },
   { top: 88, left: 22 },
 ];
-const ICONS = ["🎁", "🎨", "🎤", "🎓", "🕺"];
 
 const PATH_D =
   "M22,6 C55,10 60,20 76,25 C95,29 45,41 22,46 C-2,51 55,62 76,67 C95,71 45,83 22,88";
 
-export default function OurTraditions({ onNext }) {
+export default function OurTraditions() {
   const [openId, setOpenId] = useState(null);
   const active = traditions.find((t) => t.id === openId) ?? null;
 
@@ -38,7 +37,6 @@ export default function OurTraditions({ onNext }) {
             stroke="#c67b74"
             strokeWidth="1.4"
             strokeLinecap="round"
-            strokeDasharray="0.5 4"
             opacity="0.8"
           />
         </svg>
@@ -55,27 +53,16 @@ export default function OurTraditions({ onNext }) {
                 type="button"
                 onClick={() => setOpenId(tradition.id)}
                 whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.08 }}
-                className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-maroon bg-blush text-2xl shadow-[0_8px_16px_-6px_rgba(58,38,32,0.5)] sm:h-16 sm:w-16"
-              >
-                <span aria-hidden="true">{ICONS[i]}</span>
-              </motion.button>
+                whileHover={{ scale: 1.15 }}
+                aria-label={tradition.name}
+                className="h-4 w-4 rounded-full bg-maroon shadow-[0_4px_10px_-2px_rgba(58,38,32,0.6)] sm:h-5 sm:w-5"
+              />
               <span className="whitespace-nowrap rounded-full bg-maroon/90 px-2.5 py-0.5 font-display text-[11px] font-semibold uppercase tracking-wide text-paper">
                 {tradition.name}
               </span>
             </div>
           );
         })}
-      </div>
-
-      <div className="mt-6 flex justify-center">
-        <button
-          type="button"
-          onClick={onNext}
-          className="rounded-full bg-maroon px-6 py-2.5 font-display text-sm font-semibold text-paper shadow-md"
-        >
-          Next: who do you think →
-        </button>
       </div>
 
       <AnimatePresence>
@@ -94,39 +81,14 @@ export default function OurTraditions({ onNext }) {
               exit={{ opacity: 0, scale: 0.85, y: 20 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-sm bg-paper p-4 pb-5 shadow-2xl"
+              className="flex max-h-[80vh] w-full max-w-sm flex-col bg-paper p-4 pb-5 shadow-2xl"
             >
               <p className="mb-3 text-center font-script text-3xl text-maroon">
                 {active.name}
               </p>
-              <p className="mb-4 text-center font-hand text-lg text-ink/80">
+              <p className="mb-1 max-h-[55vh] overflow-y-auto whitespace-pre-line text-left font-body text-sm leading-relaxed text-ink/80">
                 {active.highlight}
               </p>
-              <div
-                className={`grid gap-2 ${
-                  active.media.length > 1 ? "grid-cols-2" : "grid-cols-1"
-                }`}
-              >
-                {active.media.map((m, i) => (
-                  <div
-                    key={i}
-                    className="aspect-[4/5] overflow-hidden rounded-lg bg-paper-deep"
-                  >
-                    {m.type === "video" ? (
-                      <video
-                        src={m.src}
-                        className="h-full w-full object-cover"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                      />
-                    ) : (
-                      <img src={m.src} alt="" className="h-full w-full object-cover" />
-                    )}
-                  </div>
-                ))}
-              </div>
               <button
                 type="button"
                 onClick={() => setOpenId(null)}

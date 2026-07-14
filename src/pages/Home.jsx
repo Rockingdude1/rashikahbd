@@ -1,26 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, animate } from "framer-motion";
-import StickerLabel from "../components/StickerLabel";
 import StampPhoto, { STAMP_WIDTH } from "../components/StampPhoto";
-import ReceiptSlot from "../components/ReceiptSlot";
 import { CatDoodle, BunnyDoodle, ScribbleHeart } from "../components/Doodles";
 import { homePhotos } from "../data/content";
 import { generatePaperGrainDataUrl } from "../utils/paperGrain";
 
-const BIRTHDAY = new Date("2026-07-15T00:00:00");
 const GAP = 14;
 const START_DELAY = 300; // ms before the first print begins
 const SHIFT_DURATION = 0.7; // seconds — how long each photo's own entrance takes
 const PRINT_INTERVAL = SHIFT_DURATION * 1000 + 320; // ms between one print starting and the next
 const SHIFT_TRANSITION = { type: "tween", duration: SHIFT_DURATION, ease: [0.45, 0, 0.2, 1] };
 
-function useDaysLeft() {
-  const now = new Date();
-  return Math.ceil((BIRTHDAY - now) / (1000 * 60 * 60 * 24));
-}
-
 export default function Home() {
-  const daysLeft = useDaysLeft();
   const [printed, setPrinted] = useState([]);
   const [settled, setSettled] = useState(false);
   const scrollRef = useRef(null);
@@ -96,8 +87,6 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <ReceiptSlot />
-
         <div
           className="relative z-0 mx-auto mt-2 flex flex-col"
           style={{ width: STAMP_WIDTH, gap: GAP }}
@@ -112,33 +101,16 @@ export default function Home() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: settled ? 1 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 mt-6"
-        >
-          <StickerLabel rotate={-3}>Turning 21 · July 15, 2026</StickerLabel>
-        </motion.div>
-
-        {daysLeft > 0 && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: settled ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative z-10 mt-3 font-hand text-xl text-maroon/70"
-          >
-            {daysLeft} {daysLeft === 1 ? "day" : "days"} to go ⋆
-          </motion.p>
-        )}
-
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: settled ? 1 : 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="relative z-10 mx-auto mb-4 mt-3 max-w-xs font-display text-lg italic text-ink/80"
+          transition={{ duration: 0.6 }}
+          className="relative z-10 mx-auto mb-4 mt-6 max-w-xs rounded-3xl border-2 border-maroon/70 bg-blush px-2.5 py-1.5 font-hand text-base text-maroon/70"
         >
-          A throwback to 3 years of friendship
+          Even though we're a thousand miles away, we couldn't refrain from
+          sending the best gift we could. Here's to making you smile a little
+          wider, cry a little harder, and miss us a little more this
+          birthday.
         </motion.p>
       </div>
     </div>
